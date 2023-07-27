@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Expense</title>
+  
+</head>
+<body>
+  <div class="modal">
+    <h2>Create Expense</h2>
+    <form id="expenseForm"#expenseCreateForm="ngForm"(ngSubmit)="onSubmit(expenseCreateForm)">
+      <div class="form-group">
+        <label for="expenseName">Name:</label>
+        <input type="text"name="name" id="expenseName" maxlength="140" placeholder="Name of the Expense Request" required ngModel>
+      </div>
+      <div class="form-group">
+        <label for="expenseDate">Date of Expense:</label>
+        <input type="date"name="date" id="expenseDate" placeholder="Date Field" required ngModel>
+      </div>
+      <div class="form-group">
+        <label for="expenseCategory">Category:</label>
+        <select id="expenseCategory" name="category" required ngModel>
+          <option value="Health">Health</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Travel">Travel</option>
+          <option value="Education">Education</option>
+          <option value="Books">Books</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="expenseDescription">Description:</label>
+        <textarea id="expenseDescription" placeholder="text-field" required ngModel name="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="expenseAmount">Amount:</label>
+        <input type="number" id="expenseAmount" min="0" placeholder="integer field" name="amount" ngModel>
+      </div>
+      <button type="button" class="btn-danger"(click)="oncancel()">Cancel</button>
+      <button type="submit"class="btn-create">Create</button>
+    </form>
+  </div>
+</body>
+</html>

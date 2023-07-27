@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn</title>
+    
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+  
+  </head>
+  <body>
+  
+    <div class="container">
+      <div class="forms-container">
+        <div class="signin-signup">
+          <form class="sign-in-form" #authForm="ngForm"(ngSubmit)="onSubmit(authForm)">
+            <h2 class="title">Sign In</h2>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input type="email" placeholder="Username" 
+              name="email"
+              email
+              ngModel/>
+            </div>
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input type="password" placeholder="Password" name="password"
+
+              ngModel />
+            </div>
+            
+            <p style="color:red;"*ngIf="errormsg">{{errormsg}}</p>
+            <button type="submit" value="Login" class="btn solid" [disabled]="!authForm.valid">LogIn</button>
+          </form>
+            
+            </div>
+          
+        </div>
+      </div>
+    
+    <script src="./app.js"></script>
+  </body>
+</html>

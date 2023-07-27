@@ -1,0 +1,82 @@
+
+
+<div class="modal-container" *ngIf="isAddExpenseModalOpen || isEditExpenseModalOpen">
+<app-expense-create *ngIf="isAddExpenseModalOpen"(onAddExpense)="onAddExpense($event)"></app-expense-create>
+  <app-expense-detail
+    *ngIf="isEditExpenseModalOpen"
+    [expenseData]="selectedExpenseData"
+    (onSave)="onSaveExpense($event)"
+    
+  ></app-expense-detail>
+</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Expenses</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+   
+    
+</head>
+<body><br>
+
+      
+
+    <h1>View Expenses</h1>
+    <div class="filter-container">
+        <input type="text" id="search-input" placeholder="Search by Expense Name"[(ngModel)]="searchText"  style="border-color: black; height: 20px; width: 200px;"
+        (ngModelChange)="applySearchFilter()"
+        > &nbsp; &nbsp;
+        
+        <input type="date" id="date-picker" [(ngModel)]="selectedDate" style="border-color: black; height: 20px; width: 200px;"
+        (ngModelChange)="applyDateFilter()"
+        >
+        &nbsp; &nbsp;
+        
+        
+       
+        &nbsp; &nbsp;
+        <button class="btn-create" (click)="openAddExpenseModal()">+New Expense</button>
+      </div>
+      <br><br>
+    <table id="expenses-table"style="border-color:black">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Date of Expense</th>
+                <th>Amount</th>
+                <th>Updated at</th>
+                <th>Created by</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let expense of filteredExpenseData">
+                <td>{{ expense.name }}</td>
+                <td>{{ expense.category }}</td>
+                <td>{{ expense.date_of_expense }}</td>
+                <td>INR {{ expense.amount }}</td>
+                <td>{{ expense.updated_at }}</td>
+                <td>{{ user && user.email === expense.created_by.email ? "me" : expense.created_by.email }}</td>
+
+                <td *ngIf="user && user.email === expense.created_by.email else notuser">
+                <button class="btn-danger"(click)="deleteExpense(expense.id)">
+                      <i class="fas fa-trash"></i> 
+                </button> &nbsp;
+                    
+                    <button class="btn-primary"(click)="openEditExpenseModal(expense)">
+                        <i class="fas fa-pen"></i> 
+                    </button>
+  
+                    </td>
+                    <ng-template #notuser>
+                    <td></td>
+                </ng-template>
+                    
+              </tr>
+            
+        </tbody>
+    </table>
+
+</body>
+</html>
