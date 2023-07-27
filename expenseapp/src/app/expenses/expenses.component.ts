@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { NgbModal,NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 
 
@@ -27,10 +28,12 @@ export class ExpensesComponent {
   filteredExpenseData?:[]| any;
   isAddExpenseModalOpen = false;
   isEditExpenseModalOpen = false;
+  isDeleteExpenseModel=false;
   selectedExpenseData: any;
+  expenseId?:number;
 
 
-  constructor(private http:HttpClient,private modalService:NgbModal){
+  constructor(private http:HttpClient,private modalService:NgbModal,private router:Router){
 
   }
   // Filter methods
@@ -40,6 +43,12 @@ export class ExpensesComponent {
     this.filteredExpenseData = this.expenseData.filter(
       (expense: any) => expense.date_of_expense === this.selectedDate
     );
+  }
+
+
+  LogOut(){
+    localStorage.removeItem('user')
+    this.router.navigate(["/auth"])
   }
   
   applySearchFilter() {
@@ -65,7 +74,7 @@ export class ExpensesComponent {
 
   ngOnInit(){
     const storedUser = localStorage.getItem('user');
-  this.user= storedUser ? JSON.parse(storedUser) : {};
+  this.user= storedUser ? JSON.parse(storedUser) : null;
   this.accessToken = this.user && this.user.token ? this.user.token : '';
   const headers = new HttpHeaders({
     
@@ -124,31 +133,17 @@ this.subscription=this.http.get('http://127.0.0.1:8000/api/expenses/get/expenses
       )
   }
 }
-  deleteExpense(expenseId: number) {
-    const confirmation = confirm("Are you sure you want to delete this expense?");
-    if (confirmation) {
-      const url = `http://127.0.0.1:8000/api/expenses/delete/expense/${expenseId}/`;
-      const headers = new HttpHeaders({
-        'Authorization': `Token ${this.accessToken}`,
-      });
-      const options = {
-        headers: headers
-      };
-
-      this.http.delete(url, options).subscribe(
-        () => {
-          console.log('Expense deleted successfully.');
+deleteExpense(id:number){
+  this.isDeleteExpenseModel=true;
+  this.expenseId=id;
   
-        },
-        (error) => {
-          console.error('Error deleting expense:', error);
-          
-        }
-      );
-      this.reloadPage()
-    }
-    
-    
+}
+  onDelete(success:boolean){
+   this.isDeleteExpenseModel=false
+   if(success){
+    this.reloadPage()
+   }
+   
   }
   
  

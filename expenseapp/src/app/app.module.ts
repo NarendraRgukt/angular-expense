@@ -12,11 +12,13 @@ import { ExpensesComponent } from './expenses/expenses.component';
 
 import { ExpenseDetailComponent } from './expense-detail/expense-detail.component';
 import { ExpenseCreateComponent } from './expense-create/expense-create.component';
+import { ExpenseDeleteComponent } from './expense-delete/expense-delete.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/auth' },
     {path:'auth',component:AuthComponent},
-  {path:'expenses',component:ExpensesComponent}
+  {path:'expenses',component:ExpensesComponent},
+  {path:'expenses/delete',component:ExpenseDeleteComponent}
 ]
 
 @NgModule({
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     AuthComponent,
     ExpensesComponent,
     ExpenseDetailComponent,
-    ExpenseCreateComponent
+    ExpenseCreateComponent,
+    ExpenseDeleteComponent
   ],
   imports: [
     BrowserModule,

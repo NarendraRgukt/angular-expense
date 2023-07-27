@@ -1,6 +1,6 @@
 
 
-<div class="modal-container" *ngIf="isAddExpenseModalOpen || isEditExpenseModalOpen">
+<div class="modal-container" *ngIf="isAddExpenseModalOpen || isEditExpenseModalOpen || isDeleteExpenseModel">
 <app-expense-create *ngIf="isAddExpenseModalOpen"(onAddExpense)="onAddExpense($event)"></app-expense-create>
   <app-expense-detail
     *ngIf="isEditExpenseModalOpen"
@@ -8,6 +8,14 @@
     (onSave)="onSaveExpense($event)"
     
   ></app-expense-detail>
+
+  <app-expense-delete 
+  *ngIf="isDeleteExpenseModel"
+  [expenseID]="expenseId"
+  (deleteInfo)="onDelete($event)"></app-expense-delete>
+
+
+  
 </div>
 <!DOCTYPE html>
 <html>
@@ -35,7 +43,12 @@
         
        
         &nbsp; &nbsp;
-        <button class="btn-create" (click)="openAddExpenseModal()">+New Expense</button>
+        <button class="btn-create" (click)="openAddExpenseModal()"*ngIf="user">+New Expense</button>
+        &nbsp; &nbsp;
+        &nbsp; &nbsp;
+        &nbsp; &nbsp;
+
+        <button class="btn-log" (click)="LogOut()"*ngIf="user">LogOut</button>
       </div>
       <br><br>
     <table id="expenses-table"style="border-color:black">

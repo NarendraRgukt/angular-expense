@@ -67,6 +67,17 @@ body {
   width: 200px;
   height: 40px;
 }
+.btn-log{
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color:orange;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+}
 /* view-expenses.component.css */
 .modal-container {
     display: flex;
