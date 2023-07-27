@@ -1,7 +1,7 @@
 
 
 <div class="modal-container" *ngIf="isAddExpenseModalOpen || isEditExpenseModalOpen || isDeleteExpenseModel">
-<app-expense-create *ngIf="isAddExpenseModalOpen"(onAddExpense)="onAddExpense($event)"></app-expense-create>
+<app-expense-create *ngIf="isAddExpenseModalOpen"(onAddExpense)="onAddExpense($event)"(newData)="onAddNewData($event)"></app-expense-create>
   <app-expense-detail
     *ngIf="isEditExpenseModalOpen"
     [expenseData]="selectedExpenseData"

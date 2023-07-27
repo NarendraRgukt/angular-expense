@@ -12,9 +12,12 @@ import { Subscription } from 'rxjs';
 export class ExpenseCreateComponent {
   user:any;
   subscription?:Subscription;
+  subscription1?:Subscription;
+
   accessToken?:string;
   newExpense = {}; // An empty object to store the data for the new expense
   @Output() onAddExpense: EventEmitter<any> = new EventEmitter<any>();
+  @Output() newData=new EventEmitter<any>()
   constructor(private http:HttpClient,private router:Router){
 
   }
@@ -52,6 +55,8 @@ export class ExpenseCreateComponent {
       this.subscription=this.http.post('http://127.0.0.1:8000/api/expenses/create/expense/',postData,options).subscribe(((data)=>{
         this.onAddExpense.emit(true);
       }))
+
+
       form.reset()
       
       
@@ -62,6 +67,11 @@ export class ExpenseCreateComponent {
 oncancel(){
   this.onAddExpense.emit(false)
 }
+
+ngOnDestroy(){
+  this.subscription?.unsubscribe()
+}
+
 
 
 }

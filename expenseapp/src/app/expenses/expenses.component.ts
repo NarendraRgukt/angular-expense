@@ -99,6 +99,11 @@ this.subscription=this.http.get('http://127.0.0.1:8000/api/expenses/get/expenses
     this.isAddExpenseModalOpen = true;
   }
 
+  onAddNewData(expense:any){
+    this.filteredExpenseData=expense
+
+  }
+
   onAddExpense(newExpense: any) {
     this.msg="expense added succesfully"
     this.isAddExpenseModalOpen = false;
