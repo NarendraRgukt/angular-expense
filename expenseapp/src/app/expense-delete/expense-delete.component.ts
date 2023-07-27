@@ -39,11 +39,11 @@ export class ExpenseDeleteComponent {
       () => {
         console.log('Expense deleted successfully.');
         this.deleteInfo.emit(true);
-        // Perform any additional tasks after successful deletion if needed.
+       
       },
       (error) => {
         console.error('Error deleting expense:', error);
-        // Handle errors if necessary.
+       
       }
     );
   }
